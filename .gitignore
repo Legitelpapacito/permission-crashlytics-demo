@@ -1,0 +1,11 @@
+.gradle/
+.kotlin/
+**/build/
+local.properties
+**/google-services.json
+.idea/
+*.iml
+/work/
+/outputs/*.zip
+/outputs/*.bundle
+/outputs/verification-*.txt

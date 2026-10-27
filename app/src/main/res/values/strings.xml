@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">[COMPLETAR POR EL EQUIPO]</string>
+    <string name="feature_title">Demo de permisos y Crashlytics</string>
+    <string name="count_contacts">Contar contactos</string>
+    <string name="feature_description">Cuenta contactos del dispositivo sin mostrar nombres ni teléfonos.</string>
+    <string name="permission_rationale">Necesitamos leer tus contactos para contar cuántos hay. Puedes cancelar y seguir usando la pantalla.</string>
+    <string name="permission_title">Permiso necesario</string>
+    <string name="continue_action">Continuar</string>
+    <string name="cancel_action">Cancelar</string>
+    <string name="settings_title">Solicitud bloqueada</string>
+    <string name="settings_description">Android no permite solicitar este permiso ahora. Si deseas usar la función, puedes habilitarlo en Ajustes. También puedes cancelar.</string>
+    <string name="open_settings">Abrir Ajustes</string>
+    <string name="ready_status">Pulsa el botón para comenzar.</string>
+    <string name="loading_status">Contando…</string>
+    <string name="count_status">Contactos encontrados: %1$d</string>
+    <string name="denied_status">Sin permiso no se pueden contar contactos.</string>
+    <string name="blocked_status">No se pueden contar contactos. Puedes revisar el permiso en Ajustes.</string>
+    <string name="revoked_status">El permiso no está disponible. Vuelve a pulsar el botón para revisarlo.</string>
+    <string name="failure_status">No fue posible leer los contactos. Inténtalo nuevamente.</string>
+    <string name="local_mode">Modo local: no se envían reportes a Firebase.</string>
+    <string name="firebase_mode">Modo Firebase: los errores se reportan a Crashlytics.</string>
+</resources>

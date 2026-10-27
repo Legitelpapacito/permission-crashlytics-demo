@@ -1,0 +1,8 @@
+1. Usar nombres ingleses; clases PascalCase y miembros camelCase. (Kotlin coding conventions)
+2. Seguir UI → ViewModel → Repository; solo adaptadores de permisos y composición usan APIs Android en UI. (Guide to app architecture)
+3. Parametrizar permisos de runtime; cubrir concesión, justificación, rechazo y bloqueo con Ajustes opcionales. (Request runtime permissions)
+4. Importar Firebase únicamente en FirebaseCrashReporter; depender de CrashReporter. (Guide to app architecture; Customize crash reports)
+5. Capturar errores de datos en Repository, reportarlos no fatales y propagar cancelaciones. (Customize crash reports; Guide to app architecture)
+6. Verificar permiso en cada operación y tolerar revocaciones durante el acceso. (Request runtime permissions)
+7. Kotlin: cuatro espacios, sin imports comodín; máximo 120 columnas, 180 líneas/archivo y 60/función. (Kotlin coding conventions; límites del equipo)
+8. Hacer un commit por paso y verificarlo; conservar instrucciones breves. (Gemini best practices; Codex AGENTS.md)
