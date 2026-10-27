@@ -5,6 +5,8 @@ Fecha: 27 de octubre de 2026. Configuración probada: modo local, `firebaseEnabl
 | Comprobación | Resultado |
 | --- | --- |
 | `:app:assembleDebug` en main | APK generado correctamente. |
+| `:app:assembleDebug` en crash-demo | Correcto. La compilación no ejecuta el fallo deliberado. |
+| `:app:assembleDebug :app:testDebugUnitTest` en fix | Correcto; 8 pruebas, 0 fallos, 0 errores. |
 | `:app:testDebugUnitTest` en main | 8 pruebas, 0 fallos, 0 errores. |
 | `:app:assembleDebugAndroidTest` | APK de instrumentación compilado. No se ejecutó en dispositivo. |
 | `:app:lintDebug` | Correcto: 0 errores, 11 advertencias. |
@@ -20,3 +22,5 @@ El formato de la ruta local del SDK se corrigió y se volvió a ejecutar el aná
 Las comprobaciones mecánicas no prueban por sí solas el significado de todos los nombres, la arquitectura completa ni los comportamientos de fabricantes. Se revisaron manualmente las dependencias UI → ViewModel → Repository y que únicamente FirebaseCrashReporter importe Firebase. `PermissionGate` conserva un parámetro String y no contiene constantes de un permiso concreto.
 
 Pendiente para el equipo: comprobar los diálogos reales, Ajustes, rotación y recreación en dispositivo; compilar y ejecutar con el JSON real; observar y copiar fatal y no fatal del panel. Esos resultados son **[COMPLETAR POR EL EQUIPO]**. El nombre de la app y su ID registrado también están pendientes.
+
+El cambio funcional de main a crash-demo afecta solamente tres archivos: la conexión del botón, el Repository y el número de versión. En fix se restauran los dos primeros exactamente como en main y se incrementa la versión. No se ejecutaron las pruebas unitarias de recuperación en crash-demo: allí las defensas cuya presencia verifican se quitaron deliberadamente.
