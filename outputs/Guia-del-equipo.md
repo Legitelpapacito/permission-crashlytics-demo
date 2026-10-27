@@ -50,9 +50,11 @@ Es una consulta propuesta para la hoja, no una afirmación de que el equipo la e
 | 3. `feat: add reusable runtime permission workflow and Compose screen` | Adaptador parametrizado, diálogos y botón. |
 | 4. `build: add opt-in Crashlytics integration and Gradle wrapper` | Implementación aislada y activación explícita de Firebase. |
 | 5. `test: cover permission denial revocation and recovery boundaries` | Pruebas de autorización, revocación y cancelación; revisión de reglas. |
-| 6. Documentación y verificación | Diagramas, guía y resultados reales de compilación. |
-| 7. Solo `crash-demo` | Omitir el adaptador y quitar guardia/captura del Repository. |
-| 8. Solo `fix`, hija de `crash-demo` | Restaurar ambas defensas y subir versión. |
+| 6. `test: assert cancellation contract across coroutine stack recovery` | Comprobar el contrato de cancelación sin exigir identidad del objeto de excepción. |
+| 7. Documentación y verificación | Diagramas, guía y resultados reales de compilación. |
+| 8. Solo `crash-demo` | Omitir el adaptador y quitar guardia/captura del Repository. |
+| 9. Solo `fix`, hija de `crash-demo` | Restaurar ambas defensas y subir versión. |
+| 10. Evidencias finales de ramas | Registrar sus compilaciones y pruebas sin incorporar el fallo en main. |
 
 El historial real se consulta con `git log --all --graph --oneline`. La identidad técnica de los commits no es un integrante del equipo. Las pruebas finales integradas complementan la revisión incremental de cada paso.
 
