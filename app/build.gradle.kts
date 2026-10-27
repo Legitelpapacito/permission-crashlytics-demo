@@ -24,8 +24,8 @@ android {
             .getOrElse("dev.example.permissioncrashdemo")
         minSdk = 23
         targetSdk = 36
-        versionCode = 2
-        versionName = "1.0-crash"
+        versionCode = 3
+        versionName = "1.1-fix"
         buildConfigField("boolean", "FIREBASE_ENABLED", firebaseEnabled.toString())
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }

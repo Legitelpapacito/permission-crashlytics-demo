@@ -27,7 +27,7 @@ fun DemoRoute(
             state = state,
             requestInFlight = requestInFlight,
             firebaseEnabled = firebaseEnabled,
-            onCountRequested = viewModel::onPermissionGranted,
+            onCountRequested = requestPermission,
         )
     }
 }
