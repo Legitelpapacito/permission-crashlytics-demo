@@ -1,0 +1,45 @@
+sequenceDiagram
+    actor User as Usuario
+    participant UI as UI
+    participant Android as Sistema Android
+    participant VM as ViewModel
+    participant Repo as Repository
+
+    rect rgb(255, 225, 225)
+        Note over User,Repo: Solo rama crash-demo: error intencional
+        User->>Android: Revocar READ_CONTACTS en Ajustes
+        Note over User,Android: Android puede matar el proceso, volver a abrir la app
+        User->>UI: Tocar Contar contactos
+        Note over UI: ❌ X Regla 3 y 6: botón omite PermissionGate
+        UI->>VM: onPermissionGranted() sin comprobar
+        VM->>Repo: countContacts()
+        Note over Repo: ❌ X Regla 5 y 6: se eliminaron guardia y captura
+        Repo->>Android: query(Contacts.CONTENT_URI) sin permiso
+        Android-->>Repo: SecurityException
+        Repo-->>VM: Excepción no capturada
+        Note over UI,Repo: Se cierra la app, Crashlytics captura el fatal si Firebase está activo
+        User->>UI: Reiniciar app
+        Note over UI,Android: SDK envía el reporte pendiente, consultar el panel
+    end
+    rect rgb(220, 250, 225)
+        Note over User,Repo: Rama fix: se restauran PermissionGate y el Repository seguro
+        User->>UI: Tocar Contar contactos
+        UI->>Android: Comprobar y solicitar con PermissionGate
+        Android-->>UI: Permiso concedido
+        UI->>VM: onPermissionGranted()
+        VM->>Repo: countContacts()
+        Repo->>Android: Verificar permiso antes de consultar
+        alt Revocación entre comprobación y consulta
+            Repo->>Android: query(Contacts.CONTENT_URI)
+            Android-->>Repo: SecurityException
+        else Permiso ya ausente al entrar al Repository
+            Android-->>Repo: PERMISSION_DENIED
+            Note over Repo: Lanzar SecurityException local dentro de try
+        end
+        Note over Repo: catch SecurityException en Repository
+        Note over Repo: CrashReporter → FirebaseCrashReporter: setCustomKey + log + recordException
+        Repo-->>VM: PermissionRequired
+        VM-->>UI: Estado PermissionRequired
+        UI-->>User: Mensaje recuperable, app sigue abierta
+        Note over User,Repo: La prueba RepositoryRecoveryTest permite verificar la segunda entrada sin añadir un botón inseguro
+    end
