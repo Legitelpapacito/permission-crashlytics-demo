@@ -6,6 +6,15 @@ plugins {
     id("org.jetbrains.kotlin.plugin.compose")
 }
 
+val firebaseEnabled = providers.gradleProperty("firebaseEnabled").getOrElse("false").toBoolean()
+if (firebaseEnabled) {
+    require(file("google-services.json").isFile) {
+        "Place the team's real google-services.json in app/ before enabling Firebase."
+    }
+    apply(plugin = "com.google.gms.google-services")
+    apply(plugin = "com.google.firebase.crashlytics")
+}
+
 android {
     namespace = "dev.example.permissioncrashdemo"
     compileSdk = 36
@@ -17,7 +26,7 @@ android {
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
-        buildConfigField("boolean", "FIREBASE_ENABLED", "false")
+        buildConfigField("boolean", "FIREBASE_ENABLED", firebaseEnabled.toString())
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -31,7 +40,9 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 
-    sourceSets.getByName("main").java.srcDir("src/local/kotlin")
+    sourceSets.getByName("main").java.srcDir(
+        if (firebaseEnabled) "src/firebase/kotlin" else "src/local/kotlin",
+    )
 }
 
 kotlin {
@@ -39,16 +50,19 @@ kotlin {
 }
 
 dependencies {
-    implementation("androidx.core:core-ktx:1.17.0")
+    implementation("androidx.core:core-ktx:1.18.0")
     implementation("androidx.activity:activity-compose:1.13.0")
-    implementation(platform("androidx.compose:compose-bom:2026.10.00"))
-    implementation("androidx.compose.material3:material3")
-    implementation("androidx.compose.ui:ui")
-    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.11.0")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.11.0")
+    implementation("androidx.compose.material3:material3:1.4.0")
+    implementation("androidx.compose.ui:ui:1.11.0")
+    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.10.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.10.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2")
     testImplementation("junit:junit:4.13.2")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.10.2")
     androidTestImplementation("androidx.test.ext:junit:1.3.0")
     androidTestImplementation("androidx.test:runner:1.7.0")
+    if (firebaseEnabled) {
+        implementation(platform("com.google.firebase:firebase-bom:35.1.0"))
+        implementation("com.google.firebase:firebase-crashlytics")
+    }
 }
