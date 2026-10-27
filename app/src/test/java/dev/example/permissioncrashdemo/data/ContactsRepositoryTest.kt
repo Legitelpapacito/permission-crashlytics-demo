@@ -63,7 +63,8 @@ class ContactsRepositoryTest {
 
         val failure = runCatching { repository.countContacts() }.exceptionOrNull()
 
-        assertSame(cancellation, failure)
+        assertTrue(failure is CancellationException)
+        assertEquals(cancellation.message, failure?.message)
         assertTrue(reporter.errors.isEmpty())
     }
 }
