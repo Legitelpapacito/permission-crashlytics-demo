@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "596365056573",
+    "project_id": "progra-moviles",
+    "storage_bucket": "progra-moviles.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:596365056573:android:c9e8a40bc97b00909d6854",
+        "android_client_info": {
+          "package_name": "dev.example.permissioncrashdemo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAhn7dRUOtH2agGHBP05zoznpJtAj7tKkQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
